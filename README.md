@@ -9,14 +9,14 @@ This repository contains all preprocessing, training, and evaluation scripts use
 
 ## Repository Structure
 
-ML-THz-SINATRA/
-├── data/ # Processed datasets (ZIPs excluded)
-├── notebooks/ # Jupyter notebooks for analysis
-├── src/ # Core Python source code
-├── models/ # Trained model checkpoints
-├── results/ # Figures, metrics, and plots
-├── requirements.txt # List of dependencies
-└── README.md # You are here
+ML-THz-SINATRA/  
+├── data/ # Processed datasets (ZIPs excluded)  
+├── notebooks/ # Jupyter notebooks for analysis  
+├── src/ # Core Python source code  
+├── models/ # Trained model checkpoints  
+├── results/ # Figures, metrics, and plots  
+├── requirements.txt # List of dependencies  
+└── README.md # You are here  
 
 
 
