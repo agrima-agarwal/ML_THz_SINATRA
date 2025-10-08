@@ -2,7 +2,7 @@
 
 Machine Learning–based analysis of Terahertz (THz) spectroscopy data for skin disease classification using the SINATRA dataset.
 This project explores the use of **THz time-domain spectroscopy (THz-TDS)** for differentiating between **healthy, dry, and cancerous skin tissues** using machine learning models.
-This repository contains all preprocessing, training, and evaluation scripts used for the experiments presented in our paper.
+This repository contains all preprocessing, training and evaluation, and plotting scripts used for the experiments presented in our paper.
 
 
 ---
