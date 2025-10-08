@@ -34,9 +34,9 @@ Run 'Train models' to train the 10 defined ML models and obtain their respective
 
 ## Author
 
-Agrima Agarwal
-University of Warwick
-agrima.agarwal@warwick.ac.uk
+Agrima Agarwal  
+University of Warwick  
+agrima.agarwal@warwick.ac.uk  
 
 ---
 
