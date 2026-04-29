@@ -50,5 +50,5 @@ labels=np.array((labels),dtype=int)
 X = imp_all[np.where((labels==0)|(labels==1))]
 y = labels[(labels == 0) | (labels == 1)]
 
-np.savez('Xy_dry-skin-10-moist', X=X, y=y)
+np.savez('outputs/Xy_dry-skin-10-moist', X=X, y=y)
 

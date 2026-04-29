@@ -29,7 +29,13 @@ plt.rcParams.update({
     'savefig.dpi': 300
 })
 
-data = np.load('Xy_dry-skin-no-moist.npz')
+#%%
+# data = np.load('outputs/Xy_dry-skin-type.npz')
+# data = np.load('outputs/Xy_dry-skin-no-moist.npz')
+# data = np.load('outputs/Xy_dry-skin-10-moist.npz')
+# data = np.load('outputs/Xy_dry-skin-20-moist.npz')
+# data = np.load('outputs/Xy_dry-skin-type.npz')
+data = np.load('outputs/Xy_skin-cancer.npz')
 X = data['X']
 y = data['y']
 
@@ -38,11 +44,14 @@ y = data['y']
 # === PCA Plot ===
 plt.figure(figsize=(6, 8))
 
-plt.plot(np.mean(X[37:,:],axis=0),linestyle='--', color='blue', label='Healthy')
-plt.plot(np.mean(X[:37,:],axis=0),linestyle='-', color='red', label='Dry')
+# plt.plot(np.mean(X[y==0,:],axis=0),linestyle='--', color='blue', label='Healthy')
+# plt.plot(np.mean(X[y==1,:],axis=0),linestyle='-', color='red', label='Dry')
 
 # plt.plot(np.mean(X[y==0,:],axis=0),linestyle='--', color='blue', label='Eczema')
 # plt.plot(np.mean(X[y==1,:],axis=0),linestyle='-', color='red', label='Psoriasis')
+
+plt.plot(np.mean(X[y==0,:],axis=0),linestyle='--', color='blue', label='Healthy')
+plt.plot(np.mean(X[y==1,:],axis=0),linestyle='-', color='red', label='Skin cancer')
 
 # plt.plot(np.mean(X[37:,:],axis=0),linestyle='--', color='blue', label='Healthy')
 # plt.plot(np.mean(X[:37,:],axis=0),linestyle='-', color='red', label='Skin cancer')
@@ -51,7 +60,7 @@ plt.xlim([8000, 8400])
 plt.xlabel('Data points')
 plt.ylabel('Amplitude')
 plt.legend(loc='upper right',fontsize=18)
-plt.ylim([-0.027,0.034])
+plt.ylim([-0.028,0.034])
 # plt.grid()
 plt.tight_layout()
 plt.show()
@@ -77,6 +86,7 @@ plt.tight_layout()
 plt.show()
 
 #%% box plots of P.C. 1 score for different classes
+from scipy.stats import ttest_ind
  
 data = [transformed_data[y==0,0], transformed_data[y==1,0]]
 positions = [1, 1.5]
@@ -86,9 +96,9 @@ bp = plt.boxplot(
     data,
     positions=positions,
     widths=0.2,
-    labels=['Healthy', 'Dry'],
+    # labels=['Healthy', 'Dry'],
     # labels=['Eczema', 'Psoriasis'],
-    # labels=['Healthy', 'Skin cancer'],
+    labels=['Healthy', 'Skin cancer'],
     patch_artist=True,
     boxprops=dict(linewidth=4),       # make box edges bold
     whiskerprops=dict(linewidth=4),   # make whiskers bold
@@ -105,3 +115,6 @@ plt.xticks(fontsize=16)
 plt.tight_layout()
 plt.show()
 
+t_stat, p_ttest = ttest_ind(transformed_data[y==0,0], transformed_data[y==1,0], equal_var=False)
+
+print(f"Welch’s t-test:      statistic = {t_stat:.3f}, p-value = {p_ttest:.4f}")

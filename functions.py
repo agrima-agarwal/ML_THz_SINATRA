@@ -53,9 +53,6 @@ class THzData:
         Wf = np.zeros((len(tn), wf.shape[1]))
         # for all samples 
         for i in range(wf.shape[1]):
-            # align the signal w.r.t their lowest peaks to remove shift due to
-            # mechanical translation
-            # Wf[:, i] = np.interp(tn, t, wf[:, i])
             Wf[:, i] =  wf[:, i]
             b3 = np.argmin(Wf[:len(Wf)//2, i])
             shift = b1-b3
@@ -90,8 +87,7 @@ class THzData:
             phase_map[:,i] = np.angle(output_data[i].M_cut_sample)
             
             
-        # P2P_norm = P2P/max(P2P)     
-        # self.P2P_norm = P2P_norm
+
         self.impulses = imp
         self.impulses_freq = imp1
         self.output_data = output_data
@@ -182,14 +178,12 @@ def MENLO_tuckey_window(data_str, window_para, mid_2nd_pulse,window_size):
     output_datas = data_str
     if window_para != 0:
         normal_pos = len(output_datas[0].reference_td)//2+(np.argmin(output_datas[0].reference_td[len(output_datas[0].reference_td)//2:])+np.argmax(output_datas[0].reference_td[len(output_datas[0].reference_td)//2:]))//2
-        # normal_pos = (np.argmin(output_datas[0].reference_td)+np.argmax(output_datas[0].reference_td))//2
         mid_2nd_pulse = normal_pos
         window_ftn1 = sp.signal.windows.tukey(window_size, 0.85)
         m = len(data_str)
         for i in range(m):
             output_datas[i].sample_td = data_str[i].sample_td[mid_2nd_pulse-(window_size//2):mid_2nd_pulse+(window_size//2)]
             output_datas[i].reference_td = data_str[i].reference_td[mid_2nd_pulse-(window_size//2):mid_2nd_pulse+(window_size//2)]
-            # normal_pos = (np.argmin(output_datas[0].reference_td)+np.argmax(output_datas[0].reference_td))//2
             normal_pos = len(output_datas[0].reference_td)//2+(np.argmin(output_datas[0].reference_td[len(output_datas[0].reference_td)//2:])+np.argmax(output_datas[0].reference_td[len(output_datas[0].reference_td)//2:]))//2
             window_ftn = scnd.shift(window_ftn1,  normal_pos.item()-window_size//2, mode='nearest')
             output_datas[i].sample_td = window_ftn * output_datas[i].sample_td
@@ -202,9 +196,7 @@ def MENLO_tuckey_window(data_str, window_para, mid_2nd_pulse,window_size):
 
 def MENLO_FFT(data_str):
     fft_length = len(data_str[0].sample_td)
-    # fft_length = 3613
     signal_length = len(data_str[0].time)
-    # signal_length = fft_length
     deltaT = (data_str[0].time)[1] - (data_str[0].time)[0]
     MaxFreq = 1 / deltaT
     DeltaFreq = MaxFreq / (signal_length - 1)
@@ -213,7 +205,6 @@ def MENLO_FFT(data_str):
     m = len(data_str)
     for i in range(m):
         sample_fd = np.fft.rfft(data_str[i].sample_td,fft_length)
-        # sample_fd1 = np.fft.rfft(data_str[i].sample_td)
         reference_fd = np.fft.rfft(data_str[i].reference_td,fft_length)
         output_datas[i].sample_fd = sample_fd
         output_datas[i].reference_fd = reference_fd
@@ -226,12 +217,9 @@ def MENLO_impulse_direct_freq(data_str, zerofill):
         fft_length = zerofill
     else:
         fft_length = len(data_str[0].sample_td)
-    # fft_length = 3613
     freq = data_str[0].freq
     output_datas = data_str
     m = len(data_str)
-    # freq_low=0.1
-    # freq_up=0.6
     freq_low=0.1
     freq_up=1.0
     L=1/(freq_low*np.pi)

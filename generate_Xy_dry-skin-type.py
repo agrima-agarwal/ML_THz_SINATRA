@@ -43,5 +43,5 @@ X = imp_all[np.where((labels== 'p') | (labels == 'e'))]
 y = labels[(labels == 'p') | (labels == 'e')]
 y = np.where(y == 'p', 1, 0)
 
-np.savez('Xy_dry-skin-type', X=X, y=y)
+np.savez('outputs/Xy_dry-skin-type', X=X, y=y)
 

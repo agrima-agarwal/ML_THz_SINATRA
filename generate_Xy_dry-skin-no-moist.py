@@ -36,6 +36,8 @@ imp_all=[]
 labels=[]
 for i in ['roi','con']:
     imp_all1 = np.array([(getattr(obj, i).impulses).T.flatten() for obj in D]) 
+    # imp_all1 = np.array([(getattr(obj, i).sample_td).T.flatten() for obj in D]) 
+    # imp_all1 = np.array([(getattr(obj, i).impulses) for obj in D]) 
     imp_all.extend(imp_all1)
     if i=='roi':
         lab = 1
@@ -50,5 +52,8 @@ labels=np.array((labels),dtype=int)
 X = imp_all[np.where((labels==0)|(labels==1))]
 y = labels[(labels == 0) | (labels == 1)]
 
-np.savez('Xy_dry-skin-no-moist', X=X, y=y)
+np.savez('outputs/Xy_dry-skin-no-moist', X=X, y=y)
+# np.savez('outputs/Xy_sampletd_dry-skin-no-moist', X=X, y=y)
+# np.savez('outputs/Xy_2d_dry-skin-no-moist', X=X, y=y)
+
 
