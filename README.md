@@ -37,7 +37,7 @@ For the classical machine-learning methods, the data are stored as flattened fea
 For the CNN analyses, each sample is reshaped to:
 
 ```text
-\\\[N samples, 229 impulses, 400 temporal points]
+[N samples, 229 impulses, 400 temporal points]
 ```
 
 The generated `.npz` datasets use:
