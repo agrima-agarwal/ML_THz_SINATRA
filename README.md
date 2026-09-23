@@ -353,36 +353,21 @@ pip install -r requirements.txt
 ```
 
 
-
 ## Dataset availability
 
 Download the zip files from https://zenodo.org/records/17108141, extract the folders and paste them to the main repository
 
 
-
-<<<<<<< HEAD
 ## Contact
-=======
-Run 'generate_Xy_{dataset}' (e.g. generate_Xy_skin-cancer) to read the data, perform signal pre-processing and generate the arrays X and y for ML model training or plots.  
-Run 'Train models' to train the classical ML models and obtain their respective AUROC values.  
-Run 'Train cnn models' to train 1D CNN and GradCAM.  
-Run 'Make plots' to generate the plots for PCA and impulse function comparison.  
-
----
-
-## Author
->>>>>>> 6962f2d1aa87e1eb4f45014ae99e20cee6f1be06
 
 Agrima Agarwal  
 University of Warwick  
 agrima.agarwal@warwick.ac.uk
 
 
-
 ## Citation
 
 If you use this code or dataset in your research, please cite:
-
 A. Agarwal, et al. "Machine Learning Based In Vivo Classification of Skin Conditions with Terahertz Time-Domain Spectroscopy" 2026.
 
 
