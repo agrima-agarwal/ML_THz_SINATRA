@@ -37,7 +37,7 @@ For the classical machine-learning methods, the data are stored as flattened fea
 For the CNN analyses, each sample is reshaped to:
 
 ```text
-\\\[N samples, 229 impulses, 400 temporal points]
+[N samples, 229 impulses, 400 temporal points]
 ```
 
 The generated `.npz` datasets use:
@@ -53,16 +53,16 @@ y    binary class labels
 
 |Script|Purpose|
 |-|-|
-|`generate\\\_Xy\\\_datasets.py`|Generates the five processed `Xy` datasets from the raw THz measurements.|
-|`Train\\\_all\\\_models.py`|Trains and evaluates the classical ML models and the selected 1D CNN using repeated patient-independent splits.|
-|`ROC\\\_sens\\\_spec\\\_all\\\_models.py`|Generates ROC plots and calculates AUROC, sensitivity at 80% specificity, and specificity at 80% sensitivity.|
-|`CNN\\\_ablation.py`|Compares alternative 1D CNN architectures across the five classification tasks.|
-|`PCA\\\_plots.py`|Generates mean THz response plots, PCA component plots, PC1 distributions, and associated PCA statistics.|
-|`GradCAM\\\_plots.py`|Trains/loads the selected CNN and generates class-specific 1D Grad-CAM analyses.|
-|`CNN\\\_Perturbation\\\_peak\\\_trough.py`|Perturbs the positive peak and following trough of the THz impulse and quantifies changes in CNN class evidence.|
-|`Understanding\\\_Perturbation\\\_Procedure.py`|Visual demonstration of the waveform perturbation procedure without running a CNN.|
-|`CNN\\\_moist\\\_robustness\\\_and\\\_Page\\\_trend.py`|Trains the CNN at baseline and evaluates the same held-out dry-skin patients before and after moisturisation; includes Page trend analysis.|
-|`PC1\\\_moist\\\_robustness\\\_and\\\_Page\\\_trend.py`|Performs the corresponding baseline-trained PC1 hydration-robustness analysis and Page trend test.|
+|`generate_Xy_datasets.py`|Generates the five processed `Xy` datasets from the raw THz measurements.|
+|`Train_all_models.py`|Trains and evaluates the classical ML models and the selected 1D CNN using repeated patient-independent splits.|
+|`ROC_sens_spec_all_models.py`|Generates ROC plots and calculates AUROC, sensitivity at 80% specificity, and specificity at 80% sensitivity.|
+|`CNN_ablation.py`|Compares alternative 1D CNN architectures across the five classification tasks.|
+|`PCA_plots.py`|Generates mean THz response plots, PCA component plots, PC1 distributions, and associated PCA statistics.|
+|`GradCAM_plots.py`|Trains/loads the selected CNN and generates class-specific 1D Grad-CAM analyses.|
+|`CNN_Perturbation_peak_trough.py`|Perturbs the positive peak and following trough of the THz impulse and quantifies changes in CNN class evidence.|
+|`Understanding_Perturbation_Procedure.py`|Visual demonstration of the waveform perturbation procedure without running a CNN.|
+|`CNN_moist_robustness_and_Page_trend.py`|Trains the CNN at baseline and evaluates the same held-out dry-skin patients before and after moisturisation; includes Page trend analysis.|
+|`PC1_moist_robustness_and_Page_trend.py`|Performs the corresponding baseline-trained PC1 hydration-robustness analysis and Page trend test.|
 
 The analysis also requires the project-specific `functions.py` module containing the THz data-loading and preprocessing routines.
 
@@ -119,28 +119,28 @@ Early-stopping patience: 6
 Loss: CrossEntropyLoss
 ```
 
-In `CNN\\\_ablation.py`, this selected two-convolution-block architecture is named `3\\\_layer`.
+In `CNN_ablation.py`, this selected two-convolution-block architecture is named `3_layer`.
 
 
 
 ## CNN ablation study
 
-`CNN\\\_ablation(1).py` compares:
+`CNN_ablation.py` compares:
 
 ```text
-3\\\_layer
-4\\\_layer
-2\\\_layer
-no\\\_max\\\_pooling
-global\\\_avg\\\_p
+3_layer
+4_layer
+2_layer
+no_max_pooling
+global_avg_p
 ```
 
-The analysis stores per-repeat results, architecture summaries, parameter counts, and paired AUROC comparisons against the reference `3\\\_layer` architecture.
+The analysis stores per-repeat results, architecture summaries, parameter counts, and paired AUROC comparisons against the reference `3_layer` architecture.
 
 Outputs are written to:
 
 ```text
-outputs/cnn\\\_ablation/
+outputs/cnn_ablation/
 ```
 
 
@@ -159,7 +159,7 @@ The scripts report metrics including:
 * selected model hyperparameters
 * per-repeat predictions/scores
 
-`ROC\\\_sens\\\_spec\\\_all\\\_models.py` additionally calculates:
+`ROC_sens_spec_all_models.py` additionally calculates:
 
 * **Sensitivity at 80% specificity**
 * **Specificity at 80% sensitivity**
@@ -170,7 +170,7 @@ ROC curves are interpolated onto a common false-positive-rate grid for calculati
 
 ## PCA analysis
 
-`PCA\\\_plots.py` performs PCA independently for each of the five datasets and generates:
+`PCA_plots.py` performs PCA independently for each of the five datasets and generates:
 
 * mean class THz responses
 * first and second principal-component waveforms
@@ -188,7 +188,7 @@ outputs/pca/
 
 ## Grad-CAM analysis
 
-`GradCAM\\\_plots.py` performs one-dimensional Grad-CAM on the selected CNN.
+`GradCAM_plots.py` performs one-dimensional Grad-CAM on the selected CNN.
 
 The Grad-CAM analysis is intended to identify temporal regions of the THz waveform that contribute strongly to the CNN classification decision. High Grad-CAM importance should therefore be interpreted as model reliance on a waveform region rather than simply as high THz signal amplitude.
 
@@ -204,7 +204,7 @@ outputs/gradcam/
 
 ## Peak/trough perturbation analysis
 
-`CNN\\\_Perturbation\\\_peak\\\_trough.py` complements Grad-CAM by directly modifying waveform morphology and measuring the resulting change in CNN evidence.
+`CNN_Perturbation_peak_trough.py` complements Grad-CAM by directly modifying waveform morphology and measuring the resulting change in CNN evidence.
 
 The script:
 
@@ -223,7 +223,7 @@ The tested morphology scales are:
 
 Positive and negative changes in target-class logit contrast indicate whether the perturbation shifts the CNN response towards or away from the target class.
 
-`Understanding\\\_Perturbation\\\_Procedure.py` provides a step-by-step visualisation of the same perturbation operation without using the CNN.
+`Understanding_Perturbation_Procedure.py` provides a step-by-step visualisation of the same perturbation operation without using the CNN.
 
 
 
@@ -232,8 +232,8 @@ Positive and negative changes in target-class logit contrast indicate whether th
 Two scripts examine whether dry-skin model scores change systematically after moisturiser application:
 
 ```text
-CNN\\\_moist\\\_robustness\\\_and\\\_Page\\\_trend.py
-PC1\\\_moist\\\_robustness\\\_and\\\_Page\\\_trend.py
+CNN_moist_robustness_and_Page_trend.py
+PC1_moist_robustness_and_Page_trend.py
 ```
 
 For these experiments:
@@ -253,13 +253,13 @@ No moisturizer -> 10 min -> 20 min
 CNN outputs are stored under:
 
 ```text
-outputs/CNN\\\_hydration\\\_score/
+outputs/CNN_hydration_score/
 ```
 
 PC1 outputs are stored under:
 
 ```text
-outputs/PC1\\\_hydration\\\_score/
+outputs/PC1_hydration_score/
 ```
 
 
@@ -272,16 +272,16 @@ The dataset-generation scripts assume a directory structure similar to:
 project/
 |
 |-- functions.py
-|-- dry\\\_skin\\\_type.xlsx
+|-- dry_skin_type.xlsx
 |
 |-- raw files dry skin/
 |   |-- Sxxx/
 |   |   |-- roi/
 |   |   |-- control/
-|   |   |-- roi\\\_10min/
-|   |   |-- control\\\_10min/
-|   |   |-- roi\\\_20min/
-|   |   |-- control\\\_20min/
+|   |   |-- roi_10min/
+|   |   |-- control_10min/
+|   |   |-- roi_20min/
+|   |   |-- control_20min/
 |   |   |-- reference.txt
 |   |   `-- baseline.txt
 |   `-- ...
@@ -306,18 +306,18 @@ Some patients are excluded by dataset-specific quality-control blacklists define
 A typical reproduction workflow is:
 
 ```text
-1. generate\\\_Xy\\\_datasets.py
-2. CNN\\\_ablation.py
-3. Train\\\_all\\\_models.py
-4. ROC\\\_sens\\\_spec\\\_all\\\_models.py 
-5. PCA\\\_plots.py
-6. GradCAM\\\_plots.py
-7. CNN\\\_Perturbation\\\_peak\\\_trough.py
-8. CNN\\\_moist\\\_robustness\\\_and\\\_Page\\\_trend.py
-9. PC1\\\_moist\\\_robustness\\\_and\\\_Page\\\_trend.py
+1. generate_Xy_datasets.py
+2. CNN_ablation.py
+3. Train_all_models.py
+4. ROC_sens_spec_all_models.py 
+5. PCA_plots.py
+6. GradCAM_plots.py
+7. CNN_Perturbation_peak_trough.py
+8. CNN_moist_robustness_and_Page_trend.py
+9. PC1_moist_robustness_and_Page_trend.py
 ```
 
-`Understanding\\\_Perturbation\\\_Procedure.py` can be run independently after the processed no-moisturizer dry-skin dataset has been generated.
+`Understanding_Perturbation_Procedure.py` can be run independently after the processed no-moisturizer dry-skin dataset has been generated.
 
 
 
@@ -328,14 +328,14 @@ The principal output folders are:
 ```text
 outputs/
 |-- Xy/
-|-- training\\\_results/
-|-- roc\\\_plots/
-|-- cnn\\\_ablation/
+|-- training_results/
+|-- roc_plots/
+|-- cnn_ablation/
 |-- pca/
 |-- gradcam/
-|-- perturbation\\\_peak\\\_trough/
-|-- CNN\\\_hydration\\\_score/
-`-- PC1\\\_hydration\\\_score/
+|-- perturbation_peak_trough/
+|-- CNN_hydration_score/
+`-- PC1_hydration_score/
 ```
 
 The scripts create most output directories automatically.
@@ -347,11 +347,10 @@ The scripts create most output directories automatically.
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/agrima-agarwal/ML\\\_THz\\\_SINATRA.git
-cd ML\\\_THz\\\_SINATRA
+git clone https://github.com/agrima-agarwal/ML_THz_SINATRA.git
+cd ML_THz_SINATRA
 pip install -r requirements.txt
 ```
-
 
 
 ## Dataset availability
@@ -359,30 +358,16 @@ pip install -r requirements.txt
 Download the zip files from https://zenodo.org/records/17108141, extract the folders and paste them to the main repository
 
 
-
-<<<<<<< HEAD
 ## Contact
-=======
-Run 'generate_Xy_{dataset}' (e.g. generate_Xy_skin-cancer) to read the data, perform signal pre-processing and generate the arrays X and y for ML model training or plots.  
-Run 'Train models' to train the classical ML models and obtain their respective AUROC values.  
-Run 'Train cnn models' to train 1D CNN and GradCAM.  
-Run 'Make plots' to generate the plots for PCA and impulse function comparison.  
-
----
-
-## Author
->>>>>>> 6962f2d1aa87e1eb4f45014ae99e20cee6f1be06
 
 Agrima Agarwal  
 University of Warwick  
 agrima.agarwal@warwick.ac.uk
 
 
-
 ## Citation
 
 If you use this code or dataset in your research, please cite:
-
 A. Agarwal, et al. "Machine Learning Based In Vivo Classification of Skin Conditions with Terahertz Time-Domain Spectroscopy" 2026.
 
 

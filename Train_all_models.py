@@ -36,9 +36,9 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 task_no = 2
 
 TASKS = [
-    ("Dry vs Healthy - no moisturizer", "outputs/Xy_same/Xy_dry-skin-no-moist.npz", "paired_regions"),
-    ("Dry vs Healthy - 10 min moisturizer", "outputs/Xy_same/Xy_dry-skin-10-moist.npz", "paired_regions"),
-    ("Dry vs Healthy - 20 min moisturizer", "outputs/Xy_same/Xy_dry-skin-20-moist.npz", "paired_regions"),
+    ("Dry vs Healthy - no moisturizer", "outputs/Xy/Xy_dry-skin-no-moist.npz", "paired_regions"),
+    ("Dry vs Healthy - 10 min moisturizer", "outputs/Xy/Xy_dry-skin-10-moist.npz", "paired_regions"),
+    ("Dry vs Healthy - 20 min moisturizer", "outputs/Xy/Xy_dry-skin-20-moist.npz", "paired_regions"),
     ("Eczema vs Psoriasis", "outputs/Xy/Xy_dry-skin-type.npz", "single_label"),
     ("Skin Cancer vs Healthy", "outputs/Xy/Xy_skin-cancer.npz", "paired_regions"),
 ]
